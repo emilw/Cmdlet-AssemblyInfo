@@ -29,7 +29,7 @@ namespace Cmdlet_AssemblyInfo
         public string BaseTypeFilter { get; set; }
 
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = true)]
-        public string Attribute { get; set; }
+        public string AttributeFilter { get; set; }
         protected override void ProcessRecord()
         {
             var assembly =
@@ -51,9 +51,9 @@ namespace Cmdlet_AssemblyInfo
                 types = types.Where(x => x.BaseType != null ? x.BaseType.FullName.Contains(BaseTypeFilter) : false).ToList();
             }
 
-            if (!String.IsNullOrEmpty(Attribute))
+            if (!String.IsNullOrEmpty(AttributeFilter))
             {
-                types = types.Where(x => x.CustomAttributes.Any(y => y.AttributeType.FullName.Contains(Attribute))).ToList();
+                types = types.Where(x => x.CustomAttributes.Any(y => y.AttributeType.FullName.Contains(AttributeFilter))).ToList();
             }
 
             types.Take(MaxEntries).ToList().ForEach(x => result.Add(CreateType(x)));
