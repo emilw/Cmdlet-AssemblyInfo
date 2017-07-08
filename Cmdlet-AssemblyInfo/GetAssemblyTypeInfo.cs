@@ -32,8 +32,14 @@ namespace Cmdlet_AssemblyInfo
         public string AttributeFilter { get; set; }
         protected override void ProcessRecord()
         {
+            var resultTypes = Run();
+            resultTypes.ForEach(WriteObject);
+        }
+
+        public List<Type> Run()
+        {
             var assembly =
-                AssemblyDefinition.ReadAssembly(AssemblyPath);
+      AssemblyDefinition.ReadAssembly(AssemblyPath);
 
             var result = new List<Type>();
             List<TypeDefinition> types = assembly.MainModule.Types.ToList();
@@ -57,9 +63,9 @@ namespace Cmdlet_AssemblyInfo
             }
 
             types.Take(MaxEntries).ToList().ForEach(x => result.Add(CreateType(x)));
-            result.ForEach(WriteObject);
+            return result;
 
-            if(MaxEntries == types.Count())
+            if (MaxEntries == types.Count())
                 WriteWarning("Please narrow the result with a more specific filter or change the MaxEntries parameter to get all results");
         }
 
