@@ -1,6 +1,14 @@
 # Cmdlet-AssemblyInfo
 
 ## Install
+### Through PowershellGet
+[More information here](https://www.powershellgallery.com/packages/Cmdlet-AssemblyInfo)
+```powershell
+Install-Module -Name Cmdlet-AssemblyInfo 
+```
+
+### From release
+[Get the zip package here](https://github.com/emilw/Cmdlet-AssemblyInfo/releases)
 ```powershell
 Import-Module "..\..\External Tools\CmdletAssemblyInfo\Cmdlet-AssemblyInfo.dll"
 ```
