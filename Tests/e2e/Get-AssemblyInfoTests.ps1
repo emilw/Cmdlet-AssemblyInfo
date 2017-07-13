@@ -6,7 +6,7 @@ Write-Host "Module path is $modulePath"
 
 Import-Module $modulePath
 
-$testAssemblyPath = "..\bin\Debug\Tests.dll"
+$testAssemblyPath = Join-Path $PSScriptRoot ..\bin\Debug\Tests.dll
 
 Get-AssemblyTypes -AssemblyPath $testAssemblyPath
 
