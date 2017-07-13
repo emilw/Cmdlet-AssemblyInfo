@@ -1,7 +1,10 @@
 ﻿Write-Host "Starting e2e tests"
 $testFailed
 
-Import-Module ..\bin\Debug\Cmdlet-AssemblyInfo.dll
+$modulePath = Join-Path $PSScriptRoot ..\bin\Debug\Cmdlet-AssemblyInfo.dll
+Write-Host "Module path is $modulePath"
+
+Import-Module $modulePath
 
 $testAssemblyPath = "..\bin\Debug\Tests.dll"
 
