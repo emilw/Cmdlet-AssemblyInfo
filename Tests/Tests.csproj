@@ -54,6 +54,8 @@
   <ItemGroup>
     <Compile Include="Mock\BaseType.cs" />
     <Compile Include="Mock\DummyAttribute.cs" />
+    <Compile Include="Mock\SubGroup2\SpecialTypeWithAttribute2.cs" />
+    <Compile Include="Mock\SubGroup2\SubType2.cs" />
     <Compile Include="Mock\SubGroup\SpecialTypeWithAttribute.cs" />
     <Compile Include="Mock\SubGroup\SubType.cs" />
     <Compile Include="BasicFunctionalityTests.cs" />

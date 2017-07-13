@@ -30,9 +30,23 @@ namespace Tests
             var attributeFilter = typeof(DummyAttribute).FullName.ToString();
             var result = RunCmdWithParameter(attribute:attributeFilter);
 
-            Assert.IsTrue(result.Count() == 1);
+            Assert.AreEqual(2,result.Count());
             var type = result.First();
+            var type2 = result[1];
             Assert.AreEqual(typeof(Mock.SubGroup.SpecialTypeWithAttribute).FullName, type.Name);
+            Assert.AreEqual(typeof(Mock.SubGroup2.SpecialTypeWithAttribute2).FullName, type2.Name);
+        }
+
+        [TestMethod]
+        public void GetTypesByAttributeAndNamespace()
+        {
+            var attributeFilter = typeof(DummyAttribute).FullName.ToString();
+            var namespaceFilter = "Tests.Mock.SubGroup2";
+            var result = RunCmdWithParameter(attribute: attributeFilter, namespac: namespaceFilter);
+
+            Assert.AreEqual(1, result.Count());
+            var type = result.First();
+            Assert.AreEqual(typeof(Mock.SubGroup2.SpecialTypeWithAttribute2).FullName, type.Name);
         }
 
         [TestMethod]
@@ -49,7 +63,7 @@ namespace Tests
         [TestMethod]
         public void GetTypesByFullNameOnlyName()
         {
-            var name = typeof(Mock.SubGroup.SubType).Name.ToString();
+            var name = typeof(Mock.SubGroup.SubType).FullName.ToString();
             var result = RunCmdWithParameter(fullName: name);
 
             Assert.IsTrue(result.Count() == 1);
@@ -58,12 +72,12 @@ namespace Tests
         }
 
         [TestMethod]
-        public void GetTypesByBaseType()
+        public void GetTypesByBaseTypeAndNamespace()
         {
             var baseType = typeof(Mock.BaseType).FullName.ToString();
             var result = RunCmdWithParameter(baseType: baseType);
 
-            Assert.IsTrue(result.Count() == 1);
+            Assert.AreEqual(2,result.Count());
             var type = result.First();
             Assert.AreEqual(typeof(Mock.SubGroup.SubType).FullName, type.Name);
         }
